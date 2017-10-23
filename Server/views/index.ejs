@@ -1,0 +1,53 @@
+<!--  导航部分  -->
+<% include header.ejs %>
+
+<div class="content">
+    <ul class="layui-timeline">
+
+    </ul>
+</div>
+
+
+<script src="javascripts/common.js" charset="utf-8"></script>
+<script src="layui/layui.js" charset="utf-8"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    layui.use(['element','jquery','layer'], function(){
+        var element = layui.element,
+            $ = layui.jquery,
+            layer = layui.layer;
+
+        //Socket连接
+        var socket = io.connect('http://'+document.domain+':3000');
+
+        function insertLog(content) {
+            var html = '<li class="layui-timeline-item">\n' +
+                '            <i class="layui-icon layui-timeline-axis"></i>\n' +
+                '            <div class="layui-timeline-content layui-text">\n' +
+                '                <h3 class="layui-timeline-title">'+ new Date().format("yyyy-MM-dd hh:mm:ss") +'</h3>\n' +
+                '                <p>\n' +
+                                    content
+                '                </p>\n' +
+                '            </div>\n' +
+                '        </li>';
+
+            $(".layui-timeline").prepend(html);
+        }
+
+
+        //Socket
+        socket.on('connect', function () {
+            console.log('连接成功...');
+            socket.emit('login', 'realtimelog_gytai');
+        });
+
+        // 后端推送来消息时
+        socket.on('message', function(msg){
+            insertLog(msg);
+        });
+
+    });
+</script>
+
+<!--  Footer部分  -->
+<% include footer.ejs %>

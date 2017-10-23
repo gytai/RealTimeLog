@@ -1,0 +1,23 @@
+<!--  导航部分  -->
+<% include header.ejs %>
+
+<div class="wrapper">
+    <br style="width:850px;">
+        <h3>介绍:</h3>
+        <b>这是一个实时日志采集和显示系统，基于<a rel="nofollow" href="https://socket.io/">Socket.IO</a>开发。<br><br><br></b>
+        <h3>支持以下特性：</h3>
+        <ul>
+            <li>多类型客户端支持</li>
+            <li>日志实时显示,不积压数据，减少硬盘存储</li>
+            <li>支持在线设备计数</li>
+        </ul>
+        <h3>使用方法:</h3>
+        <p>
+            客户端发送get或者post请求，地址：domain + /sendMsg/?content=消息内容
+        </p>
+
+    </div>
+</div>
+
+<!--  Footer部分  -->
+<% include footer.ejs %>
